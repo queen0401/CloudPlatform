@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% from 'macros.html' import form_field %}
+
+{% block title %}运行结果{% endblock %}
+
+{% block content %}
+{% if session.filename %}
+
+<a href="{{ url_for('get_file', filename=session.filename) }}" target="_blank">
+    <img src="{{ url_for('get_file', filename=session.filename) }}">
+</a>
+<p>文件名：{{session.filename}}</p>
+<p>识别结果：{{session.number}}</p>
+
+{% endif %}
+{% endblock %}

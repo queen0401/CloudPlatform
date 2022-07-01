@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+
+
+{% block content %}
+
+<div>
+    <h2>当前用户：{{current_user.username}}</h2>
+</div>
+
+{% if current_user.is_admin == True %}
+<h2>所有用户信息：</h2>
+
+{% for user in users %}
+
+<div class = 'docker'>
+    <p><h3>id：{{user.id}}</h3></p>
+    <p>用户名：{{user.username}}</p>
+    <p>邮箱：{{user.email}}</p>
+    <a href="{{ url_for('home.del_user', user_id = user.id) }}"><input type="button" value="删除用户"></a>
+</div>
+
+
+{% endfor %}
+
+{% endif %}
+
+<div>
+    <h2>使用中的容器：</h2>
+</div>
+
+<div>
+{% for docker in dockers %}
+    <div class = 'docker'>
+        <p><h3>容器名：{{docker.name}}</h3></p>
+        <p>ip地址：{{docker.ip}}</p>
+        <p>端口号：{{docker.port}}</p>
+        <a href="{{ url_for('home.del_docker', docker_id = docker.id) }}"><input type="button" value="删除容器"></a>
+    </div>
+{% endfor %}
+</div>
+
+
+<div>
+<a href="{{ url_for('home.add_docker') }}"><input type = 'button' value="申请容器"></a>
+</div>
+
+{% endblock %}
